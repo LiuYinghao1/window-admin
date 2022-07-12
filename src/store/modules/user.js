@@ -1,4 +1,5 @@
-import userApi from "@/api/user";
+import login from "@/api/user";
+
 import { setItem, getItem, } from "@/utils/storage";
 
 export default {
@@ -14,9 +15,12 @@ export default {
   },
   actions: {
     async login({ commit }, loginForm) {
-      const token = await userApi.login(loginForm);
+      const token = await login.login(loginForm);
       commit("setToken", token);
       return token;
     },
+    
   },
+
+  
 };

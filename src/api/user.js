@@ -32,7 +32,15 @@ const login = (data) => {
   });
 };
 
+const getUserInfo=()=>{
+  return request({
+    url: "/sys/user/list",
+    method: "GET",
+  });
+}
+
 export default {
   getCaptcha,
   login,
+  getUserInfo
 };
