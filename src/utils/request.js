@@ -15,9 +15,11 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    if(store.getters.token){
-      config.headers.token=store.getters.token
-    }
+    const token=localStorage.getItem("token")
+     config.headers.token=token
+    // if(store.getters.token){
+     
+    // }
     return config;
   },
   function (error) {
