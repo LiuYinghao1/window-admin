@@ -26,7 +26,7 @@
         </span>
         <el-dropdown-menu slot="dropdown" >
           <el-dropdown-item>个人设置</el-dropdown-item>
-          <el-dropdown-item @click.native="exitLogin">安全退出</el-dropdown-item>
+          <el-dropdown-item @click.native="exitLogin" >安全退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -48,25 +48,28 @@ export default {
   created() {},
   mounted() {},
   methods: {
+
     exitLogin(){
-        // this.$store.dispatch('outLogin',)
-         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!',
+      const response= this.$store.dispatch('user/loginout')
+      console.log(response);
+      
+           this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.$message({
+              type: 'success',
+              message: '删除成功!',
+            });
+             this.$router.push('/')
+             this.handleVerifyForm()
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });          
           });
-           this.$router.push('/')
-           this.handleVerifyForm()
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });          
-        });
       
     }
   },

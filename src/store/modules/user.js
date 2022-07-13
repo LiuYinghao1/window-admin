@@ -1,6 +1,6 @@
 import login from "@/api/user";
 
-import { setItem, getItem, } from "@/utils/storage";
+import { setItem, getItem, removeItem } from "@/utils/storage";
 
 export default {
   namespaced: true,
@@ -10,7 +10,7 @@ export default {
   mutations: {
     setToken(state, token) {
       state.token = token;
-      setItem('token',token)
+      setItem("token", token);
     },
   },
   actions: {
@@ -19,8 +19,12 @@ export default {
       commit("setToken", token);
       return token;
     },
-    
-  },
 
-  
+    // 登出
+    async loginout() {
+      await login.loginout();
+      removeItem("token");
+      return true;
+    },
+  },
 };

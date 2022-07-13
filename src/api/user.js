@@ -6,7 +6,7 @@ import request from "@/utils/request";
  */
 const getCaptcha = () => {
   return request({
-    url: "/captcha",
+    url: "/sys/captcha",
     method: "GET",
   });
 };
@@ -19,7 +19,7 @@ const getCaptcha = () => {
 const login = (data) => {
   return request({
     url:
-      "/login?username=" +
+      "/sys/login?username=" +
       data.username +
       "&password=" +
       data.password +
@@ -32,15 +32,32 @@ const login = (data) => {
   });
 };
 
-const getUserInfo=()=>{
+/**
+ * 获取用户管理列表数据
+ * @returns
+ */
+const getUserInfo = (data) => {
   return request({
     url: "/sys/user/list",
     method: "GET",
+    data,
   });
+};
+
+/**
+ * 退出登录接口
+ * @returns 
+ */
+const loginout=()=>{
+  return request({
+    url:'/sys/logout',
+    method:"POST"
+  })
 }
 
 export default {
   getCaptcha,
   login,
-  getUserInfo
+  getUserInfo,
+  loginout
 };

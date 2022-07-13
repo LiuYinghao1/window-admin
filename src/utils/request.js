@@ -5,6 +5,7 @@ import exceptionMessage from './exception-message'
 
 // 导入message消息提示组件
 import { Message } from 'element-ui'
+import store from "@/store";
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -14,6 +15,9 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
+    if(store.getters.token){
+      config.headers.token=store.getters.token
+    }
     return config;
   },
   function (error) {
