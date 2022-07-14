@@ -5,8 +5,15 @@
       <el-input placeholder="请输入内容"></el-input>
       <el-button type="success"><i class="el-icon-search"></i>查询</el-button>
 
-      <el-button type="primary" icon="el-icon-edit" @click="add">新增</el-button>
+      <el-button
+        type="primary"
+        icon="el-icon-edit"
+        @click="addFormVisible = true"
+        >新增</el-button
+      >
     </div>
+
+    <!-- 表格 -->
     <div class="tab">
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column type="index" label="序号" width="80" align="center">
@@ -50,13 +57,64 @@
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" align="center">
-          <template slot-scope="scope">
+          <template>
             <el-tag type="success">编辑</el-tag>
             <el-tag type="warning">分配角色</el-tag>
             <el-tag type="danger">删除</el-tag>
           </template>
         </el-table-column>
       </el-table>
+
+      <!-- 新增弹出框 -->
+      <el-dialog title="新增用户" :visible.sync="addFormVisible" width="450px">
+        <el-form
+          :model="addUserForm"
+          label-position="right"
+          label-width="100px"
+        >
+          <el-form-item label="头像"> </el-form-item>
+          <el-form-item label="用户名">
+            <el-input
+              v-model="addUserForm.username"
+              autocomplete="off"
+              style="width: 250px"
+              clearable
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="密码">
+            <el-input
+              v-model="addUserForm.password"
+              autocomplete="off"
+              style="width: 250px"
+              clearable
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="邮箱">
+            <el-input
+              v-model="addUserForm.email"
+              autocomplete="off"
+              clearable
+              style="width: 250px"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="状态">
+            <el-radio-group v-model="addUserForm.status">
+              <el-radio label="启用"></el-radio>
+              <el-radio label="禁用"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-form>
+
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="addFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addFormVisible = false"
+            >确 定</el-button
+          >
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -75,6 +133,14 @@ export default {
         username: "",
       },
       tableData: [],
+      addUserForm: {
+        username: "",
+        password: "",
+        email: "",
+        status:1
+      },
+      addFormVisible: false,
+      dialogFormVisible: false,
     };
   },
   created() {
@@ -89,7 +155,8 @@ export default {
       this.tableData = response.records;
       console.log(this.tableData);
     },
-    add(){}
+    addFormVisible() {},
+    dialogFormVisible() {},
   },
 };
 </script>

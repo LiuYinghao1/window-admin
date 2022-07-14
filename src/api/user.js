@@ -6,7 +6,7 @@ import request from "@/utils/request";
  */
 const getCaptcha = () => {
   return request({
-    url: "/sys/captcha",
+    url: "/captcha",
     method: "GET",
   });
 };
@@ -19,7 +19,7 @@ const getCaptcha = () => {
 const login = (data) => {
   return request({
     url:
-      "/sys/login?username=" +
+      "/login?username=" +
       data.username +
       "&password=" +
       data.password +
@@ -38,7 +38,7 @@ const login = (data) => {
  */
 const getUserInfo = (data) => {
   return request({
-    url: "/sys/user/list",
+    url: "/user/list",
     method: "GET",
     data,
   });
@@ -50,7 +50,7 @@ const getUserInfo = (data) => {
  */
 const loginout=()=>{
   return request({
-    url:'/sys/logout',
+    url:'/logout',
     method:"POST"
   })
 }
